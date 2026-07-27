@@ -31,169 +31,52 @@ Getting Started with Dash
 Installation
 ~~~~~~~~~~~~
 
-To get started, let's install Dash in our virtual environment on our Linux VM. You can do this using pip:
+To get started, let's install Dash in a virtual environment on our Linux VM. You can do this using pip:
 
 .. code-block:: console
-    :emphasize-lines: 29, 35, 100
+    :emphasize-lines: 15, 16, 29
 
-    [mbs337-vm]$ cd $HOME/mbs-337
-    [mbs337-vm]$ source .venv/bin/activate
-    (.venv) [mbs337-vm]$ pip3 install dash
-    (.venv) [mbs337-vm]$ pip3 list
-    Package                   Version
-    ------------------------- -----------
-    annotated-types           0.7.0
-    anyio                     4.12.1
-    argon2-cffi               25.1.0
-    argon2-cffi-bindings      25.1.0
-    arrow                     1.4.0
-    asttokens                 3.0.1
-    async-lru                 2.2.0
-    attrs                     25.4.0
-    babel                     2.18.0
-    beautifulsoup4            4.14.3
-    biopython                 1.86
-    bleach                    6.3.0
-    blinker                   1.9.0
-    cattrs                    26.1.0
-    certifi                   2026.1.4
-    cffi                      2.0.0
-    charset-normalizer        3.4.4
-    click                     8.3.1
-    comm                      0.2.3
-    contourpy                 1.3.3
-    cryptography              46.0.5
-    cycler                    0.12.1
-    dash                      4.0.0
-    debugpy                   1.8.20
-    decorator                 5.2.1
-    defusedxml                0.7.1
-    executing                 2.2.1
-    fastjsonschema            2.21.2
-    Flask                     3.1.3
-    fonttools                 4.61.1
-    fqdn                      1.5.1
-    graphql-core              3.2.7
-    h11                       0.16.0
-    httpcore                  1.0.9
-    httpx                     0.28.1
-    idna                      3.11
-    importlib_metadata        8.7.1
-    iniconfig                 2.3.0
-    ipykernel                 7.2.0
-    ipython                   9.10.0
-    ipython_pygments_lexers   1.1.1
-    ipywidgets                8.1.8
-    isoduration               20.11.0
-    itsdangerous              2.2.0
-    jaraco.classes            3.4.0
-    jaraco.context            6.1.0
-    jaraco.functools          4.4.0
-    jedi                      0.19.2
-    jeepney                   0.9.0
-    Jinja2                    3.1.6
-    json5                     0.13.0
-    jsonpointer               3.0.0
-    jsonschema                4.26.0
-    jsonschema-specifications 2025.9.1
-    jupyter                   1.1.1
-    jupyter_client            8.8.0
-    jupyter-console           6.6.3
-    jupyter_core              5.9.1
-    jupyter-events            0.12.0
-    jupyter-lsp               2.3.0
-    jupyter_server            2.17.0
-    jupyter_server_terminals  0.5.4
-    jupyterlab                4.5.5
-    jupyterlab_pygments       0.3.0
-    jupyterlab_server         2.28.0
-    jupyterlab_widgets        3.0.16
-    keyring                   25.7.0
-    kiwisolver                1.4.9
-    lark                      1.3.1
-    lxml                      6.0.2
-    markdown-it-py            4.0.0
-    MarkupSafe                3.0.3
-    matplotlib                3.10.8
-    matplotlib-inline         0.2.1
-    mdurl                     0.1.2
-    mistune                   3.2.0
-    more-itertools            10.8.0
-    narwhals                  2.17.0
-    nbclient                  0.10.4
-    nbconvert                 7.17.0
-    nbformat                  5.10.4
-    nest-asyncio              1.6.0
-    notebook                  7.5.4
-    notebook_shim             0.2.4
-    numpy                     2.4.1
-    packaging                 26.0
-    pandas                    3.0.1
-    pandocfilters             1.5.1
-    parso                     0.8.6
-    pexpect                   4.9.0
-    pillow                    12.1.1
-    pip                       26.0.1
-    platformdirs              4.9.2
-    plotly                    6.6.0
-    pluggy                    1.6.0
-    plumbum                   1.10.0
-    ply                       3.11
-    prometheus_client         0.24.1
-    prompt_toolkit            3.0.52
-    psutil                    7.2.2
-    ptyprocess                0.7.0
-    pure_eval                 0.2.3
-    pycparser                 3.0
-    pydantic                  2.12.5
-    pydantic_core             2.41.5
-    Pygments                  2.19.2
-    pyinaturalist             0.21.1
-    pyparsing                 3.3.2
-    pyrate-limiter            2.10.0
-    pytest                    9.0.2
-    python-dateutil           2.9.0.post0
-    python-json-logger        4.0.0
-    PyYAML                    6.0.3
-    pyzmq                     27.1.0
-    rcsb-api                  1.5.0
-    redis                     7.2.0
-    referencing               0.37.0
-    requests                  2.32.5
-    requests-cache            1.3.0
-    requests-ratelimiter      0.8.0
-    retrying                  1.4.2
-    rfc3339-validator         0.1.4
-    rfc3986-validator         0.1.1
-    rfc3987-syntax            1.1.0
-    rich                      14.3.3
-    rpds-py                   0.30.0
-    rustworkx                 0.17.1
-    seaborn                   0.13.2
-    SecretStorage             3.5.0
-    Send2Trash                2.1.0
-    setuptools                82.0.0
-    six                       1.17.0
-    soupsieve                 2.8.3
-    stack-data                0.6.3
-    terminado                 0.18.1
-    tinycss2                  1.4.0
-    tornado                   6.5.4
-    tqdm                      4.67.3
-    traitlets                 5.14.3
-    typing_extensions         4.15.0
-    typing-inspection         0.4.2
-    tzdata                    2025.3
-    uri-template              1.3.0
-    url-normalize             2.2.1
-    urllib3                   2.6.3
-    wcwidth                   0.6.0
-    webcolors                 25.10.0
-    webencodings              0.5.1
-    websocket-client          1.9.0
-    Werkzeug                  3.1.6
-    widgetsnbextension        4.0.15
-    zipp                      3.23.0
+    [tutorial-vm]$ mkdir -p $HOME/dashboards
+    [tutorial-vm]$ cd $HOME/dashboards
+    [tutorial-vm]$ python3 -m venv .venv
+    [tutorial-vm]$ source .venv/bin/activate
+    (.venv) [tutorial-vm]$ pip install dash pandas
+    (.venv) [tutorial-vm]$ pip list
+    Package            Version
+    ------------------ -----------
+    annotated-types    0.8.0
+    blinker            1.9.0
+    certifi            2026.7.22
+    charset-normalizer 3.4.9
+    click              8.4.2
+    comm               0.2.3
+    dash               4.4.1
+    Flask              3.1.3
+    idna               3.18
+    importlib_metadata 9.0.0
+    itsdangerous       2.2.0
+    janus              2.0.0
+    Jinja2             3.1.6
+    MarkupSafe         3.0.3
+    narwhals           2.24.0
+    nest-asyncio       1.6.0
+    numpy              2.5.1
+    packaging          26.2
+    pandas             3.0.5
+    pip                24.0
+    plotly             6.9.0
+    pydantic           2.13.4
+    pydantic_core      2.46.4
+    python-dateutil    2.9.0.post0
+    requests           2.34.2
+    retrying           1.4.2
+    setuptools         83.0.0
+    six                1.17.0
+    typing_extensions  4.16.0
+    typing-inspection  0.4.2
+    urllib3            2.7.0
+    Werkzeug           3.1.8
+    zipp               4.1.0
 
 Notice that not only was Dash installed, but also its dependencies, including
 `Flask <https://flask.palletsprojects.com/>`_ and Plotly. Flask is a lightweight web framework
@@ -205,19 +88,19 @@ Our First Dash Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To start, we're going to create the simplest possible Dash application, the infamous "Hello, Dash!" app.
-First, let's create a new directory called ``dash_app`` in our mbs-337 directory on the Linux VM, and then
+First, let's create a new directory called ``dash_app`` in our dashboards directory on the Linux VM, and then
 create a new Python file called ``app.py`` inside that directory:
 
 .. code-block:: console
 
-    (.venv) [mbs337-vm]$ mkdir dash_app
-    (.venv) [mbs337-vm]$ cd dash_app
-    (.venv) [mbs337-vm]$ touch app.py
-    (.venv) [mbs337-vm]$ ls -l
+    (.venv) [tutorial-vm]$ mkdir dash_app
+    (.venv) [tutorial-vm]$ cd dash_app
+    (.venv) [tutorial-vm]$ touch app.py
+    (.venv) [tutorial-vm]$ ls -l
     total 0
-    -rw-rw-r-- 1 ubuntu ubuntu 0 Mar  8 18:45 app.py
+    -rw-rw-r-- 1 exouser exouser 0 Jul 27 16:51 app.py
 
-Next, let's open the ``app.py`` file in our VS Code editor and add the following code:
+Next, let's open the ``app.py`` file in a text editor (like ``vim`` or ``nano``) and add the following code:
 
 .. code-block:: python
     :linenos:
@@ -259,13 +142,13 @@ production environments for security reasons.
     * 6379: Redis Database
     * 8888: Jupyter Notebook Server
 
-To run the application, we can use the following command in our VS Code terminal:
+To run the application, we can use the following command in our terminal:
 
 .. code-block:: console
 
-    (.venv) [mbs337-vm]$ curl ip.me
+    (.venv) [tutorial-vm]$ curl ip.me
     129.114.38.51
-    (.venv) [mbs337-vm]$ python app.py
+    (.venv) [tutorial-vm]$ python app.py
     Dash is running on http://0.0.0.0:8050/
 
      * Serving Flask app 'app'
@@ -293,23 +176,23 @@ download the dataset:
 
 .. code-block:: console
 
-    (.venv) [mbs337-vm]$ wget https://raw.githubusercontent.com/tacc/mbs-337-sp26/main/docs/unit07/sample-data/Austin_Animal_Center_Outcomes.zip
-    (.venv) [mbs337-vm]$ unzip Austin_Animal_Center_Outcomes.zip
+    (.venv) [tutorial-vm]$ wget https://raw.githubusercontent.com/tacc/interactive-dashboards-with-plotly-dash/main/docs/dashboards/sample-data/Austin_Animal_Center_Outcomes.zip
+    (.venv) [tutorial-vm]$ unzip Austin_Animal_Center_Outcomes.zip
     Archive:  Austin_Animal_Center_Outcomes.zip
       inflating: Austin_Animal_Center_Outcomes.csv
-    (.venv) [mbs337-vm]$ rm Austin_Animal_Center_Outcomes.zip
-    (.venv) [mbs337-vm]$ ls -l
+    (.venv) [tutorial-vm]$ rm Austin_Animal_Center_Outcomes.zip
+    (.venv) [tutorial-vm]$ ls -l
     total 20844
-    -rw-rw-r-- 1 ubuntu ubuntu 21338783 May  7  2025 Austin_Animal_Center_Outcomes.csv
-    -rw-rw-r-- 1 ubuntu ubuntu      171 Mar  8 19:18 app.py
+    -rw-rw-r-- 1 exouser exouser 21338783 Jul 27 17:03 Austin_Animal_Center_Outcomes.csv
+    -rw-rw-r-- 1 exouser exouser      171 Jul 27 16:55 app.py
 
 We also need to install the ``dash-ag-grid`` component, which we can do using pip:
 
 .. code-block:: console
 
-    (.venv) [mbs337-vm]$ pip3 install dash-ag-grid
-    (.venv) [mbs337-vm]$ pip3 list | grep dash_ag_grid
-    dash_ag_grid              33.3.3
+    (.venv) [tutorial-vm]$ pip install dash-ag-grid
+    (.venv) [tutorial-vm]$ pip list | grep dash_ag_grid
+    ash_ag_grid       35.3.0
 
 Now, we can modify our ``app.py`` file to read in the dataset with ``pandas`` into a DataFrame and display
 it in a table. We will use the ``dash_ag_grid`` component to create an interactive table that allows us to
@@ -338,7 +221,7 @@ sort and filter the data. Here is the modified code for our Dash application:
     if __name__ == '__main__':
         app.run(host='0.0.0.0', port=8050, debug=True)
 
-Again, to run the application, we can use the following command in our VS Code terminal:
+Again, to run the application, we can use the following command in our terminal:
 
 .. code-block:: console
 
@@ -515,8 +398,8 @@ integrated into Dash applications to provide a clean and responsive design. We c
 
 .. code-block:: console
 
-    (.venv) [mbs337-vm]$ pip3 install dash-bootstrap-components
-    (.venv) [mbs337-vm]$ pip3 list | grep dash_bootstrap_components
+    (.venv) [tutorial-vm]$ pip install dash-bootstrap-components
+    (.venv) [tutorial-vm]$ pip list | grep dash-bootstrap-components
     dash-bootstrap-components 2.0.4
 
 Now we can modify our Dash application to use some Bootstrap components and styling. We will import the

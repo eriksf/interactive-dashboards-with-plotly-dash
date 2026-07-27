@@ -417,7 +417,7 @@ Again, to run the updated app, simply execute the following command in your VS C
 
 .. code-block:: console
 
-    (.venv) [mbs337-vm]$ python app.py
+    (.venv) [tutorial-vm]$ python app.py
     Dash is running on http://0.0.0.0:8050/
 
     * Serving Flask app 'app'

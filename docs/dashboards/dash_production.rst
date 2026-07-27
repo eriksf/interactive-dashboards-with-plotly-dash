@@ -34,9 +34,9 @@ Let's first add it to our project dependencies by adding it to our ``requirement
 
 .. code-block:: console
 
-    [mbs337-vm]$ cd pdb-dashboard
-    [mbs337-vm]$ echo "gunicorn" >> requirements.txt
-    [mbs337-vm]$ cat requirements.txt
+    [tutorial-vm]$ cd $HOME/dashboards/pdb-dashboard
+    [tutorial-vm]$ echo "gunicorn" >> requirements.txt
+    [tutorial-vm]$ cat requirements.txt
     dash
     biopython
     dash-bootstrap-components
@@ -47,10 +47,10 @@ Then, let's activate our virtual environment and install the dependencies:
 
     .. code-block:: console
     
-        [mbs337-vm]$ source .venv/bin/activate
-        (.venv) [mbs337-vm]$ pip install -r requirements.txt
-        (.venv) [mbs337-vm]$ pip list | grep gunicorn
-        gunicorn                  25.1.0
+        [tutorial-vm]$ source .venv/bin/activate
+        (.venv) [tutorial-vm]$ pip install -r requirements.txt
+        (.venv) [tutorial-vm]$ pip list | grep gunicorn
+        gunicorn                  26.0.0
 
 The next step is to create a Gunicorn configuration file. This file will specify the settings for our
 application, such as the number of worker processes and the port to bind to. We can create a file named
@@ -83,12 +83,13 @@ Finally, we can run the Gunicorn server by executing the following command in ou
 
     .. code-block:: console
     
-        (.venv) [mbs337-vm]$ gunicorn -c gunicorn_config.py app:server
-        [2026-03-11 17:05:26 +0000] [18376] [INFO] Starting gunicorn 25.1.0
-        [2026-03-11 17:05:26 +0000] [18376] [INFO] Listening at: http://0.0.0.0:8050 (18376)
-        [2026-03-11 17:05:26 +0000] [18376] [INFO] Using worker: sync
-        [2026-03-11 17:05:26 +0000] [18376] [INFO] Control socket listening at /home/ubuntu/mbs-337/pdb-dash/gunicorn.ctl
-        [2026-03-11 17:05:26 +0000] [18379] [INFO] Booting worker with pid: 18379
+        (.venv) [tutorial-vm]$ gunicorn -c gunicorn_config.py app:server
+        2026-07-27 20:33:46 +0000] [108412] [INFO] Starting gunicorn 26.0.0
+        [2026-07-27 20:33:46 +0000] [108412] [INFO] Listening at: http://0.0.0.0:8050 (108412)
+        [2026-07-27 20:33:46 +0000] [108412] [INFO] Using worker: sync
+        [2026-07-27 20:33:46 +0000] [108413] [INFO] Booting worker with pid: 108413
+        [2026-07-27 20:33:46 +0000] [108414] [INFO] Booting worker with pid: 108414
+        [2026-07-27 20:33:46 +0000] [108412] [INFO] Control socket listening at /run/user/1001/gunicorn.ctl
     
 In this command, we are telling Gunicorn to use the configuration file we created and to run the application
 defined in the ``app.py`` file. The ``app:server`` part specifies that we want to run the Dash app defined
@@ -107,18 +108,18 @@ our current directory structure looks like:
 
 .. code-block:: console
 
-    [mbs337-vm]$ cd pdb-dashboard
-    [mbs337-vm]$ ls
+    [tutorial-vm]$ cd pdb-dashboard
+    [tutorial-vm]$ ls
     app.py	gunicorn_config.py  requirements.txt
 
-If you remember from Unit 5, the first step in containerizing our Dash app is to create a Dockerfile.
+If you remember from a previous section, the first step in containerizing our Dash app is to create a Dockerfile.
 A Dockerfile is a text file that contains instructions for building a Docker image. Let's create a
 Dockerfile in our current directory:
 
 .. code-block:: console
 
-    [mbs337-vm]$ touch Dockerfile
-    [mbs337-vm]$ ls
+    [tutorial-vm]$ touch Dockerfile
+    [tutorial-vm]$ ls
     Dockerfile  app.py  gunicorn_config.py	requirements.txt
 
 The important first step in our Dockerfile is to specify the base image we want to use.
@@ -201,7 +202,7 @@ build the image from our Dockerfile. We will tag the image with an owner, <usern
 
     .. code-block:: console
     
-        [mbs337-vm]$ docker build -t <username>/pdb-dashboard:1.0 .
+        [tutorial-vm]$ docker build -t <username>/pdb-dashboard:1.0 .
         Sending build context to Docker daemon  17.92kB
         Step 1/6 : FROM python:3.12.13
         ...
@@ -212,7 +213,7 @@ Using Docker Compose to Run our Dash App
 ----------------------------------------
 
 Now that we have our Dash app running in a Docker container, we can take it a step further and use Docker Compose
-to manage our application. Remember from Unit 5, Docker Compose is a tool that allows us to define and run
+to manage our application. Remember from a previous section, Docker Compose is a tool that allows us to define and run
 multi-container Docker applications. With Docker Compose, we can define our application services, networks,
 and volumes in a single YAML file, and then use a single command to start and stop our application. This makes
 it easier to manage our application and ensures that all the components of our application are running together.
@@ -222,8 +223,8 @@ easily scale our application in the future if needed. Let's create a Docker Comp
 
 .. code-block:: console
 
-    [mbs337-vm]$ touch docker-compose.yml
-    [mbs337-vm]$ ls
+    [tutorial-vm]$ touch docker-compose.yml
+    [tutorial-vm]$ ls
     Dockerfile  app.py  docker-compose.yml  gunicorn_config.py  requirements.txt
 
 In our Docker Compose file, we will define a service for our Dash app. We will specify that we want to
@@ -300,7 +301,7 @@ in our terminal:
 
     .. code-block:: console
     
-        [mbs337-vm]$ docker-compose up -d
+        [tutorial-vm]$ docker-compose up -d
         [+] Building 0.2s (10/10) FINISHED                                                                                      docker:default
          => [dash-app internal] load build definition from Dockerfile                                                                     0.0s
          => => transferring dockerfile: 578B                                                                                              0.0s
@@ -327,7 +328,7 @@ And verify that our Dash app is running by running the following command:
 
     .. code-block:: console
     
-        [mbs337-vm]$ docker compose ps
+        [tutorial-vm]$ docker compose ps
         NAME       IMAGE               COMMAND                  SERVICE    CREATED         STATUS         PORTS
         dash-app   pdb-dash-dash-app   "gunicorn -c gunicor…"   dash-app   2 minutes ago   Up 2 minutes   0.0.0.0:8050->8050/tcp, [::]:8050->8050/tcp
 
@@ -346,7 +347,7 @@ And to stop our application, run the following command:
 
     .. code-block:: console
     
-        [mbs337-vm]$ docker-compose down
+        [tutorial-vm]$ docker-compose down
         [+] Running 2/2
          ✔ Container dash-app        Removed                                                                                              0.8s
          ✔ Network pdb-dash_default  Removed
