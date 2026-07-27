@@ -23,21 +23,23 @@ a new directory called ``pdb-dashboard`` in our mbs-337 directory on the Linux V
 
 .. code-block:: console
 
-    [mbs337-vm]$ mkdir pdb-dashboard
-    [mbs337-vm]$ cd pdb-dashboard
+    [tutorial-vm]$ cd $HOME/dashboards
+    [tutorial-vm]$ deactivate
+    [tutorial-vm]$ mkdir pdb-dashboard
+    [tutorial-vm]$ cd pdb-dashboard
 
-Instead of using our ever-growing virtual environment, we will create a new one specifically for this project.
+Instead of using our previous virtual environment, we will create a new one specifically for this project.
 This will help us keep our dependencies organized and avoid conflicts with other projects.
 
 .. code-block:: console
 
-    [mbs337-vm]$ python3 -m venv .venv
-    [mbs337-vm]$ source .venv/bin/activate
-    [mbs337-vm]$ ls -la
+    [tutorial-vm]$ python3 -m venv .venv
+    [tutorial-vm]$ source .venv/bin/activate
+    [tutorial-vm]$ ls -la
     total 12
-    drwxrwxr-x  3 ubuntu ubuntu 4096 Mar  9 18:05 .
-    drwxrwxr-x 12 ubuntu ubuntu 4096 Mar  9 18:05 ..
-    drwxrwxr-x  5 ubuntu ubuntu 4096 Mar  9 18:05 .venv
+    drwxrwxr-x 3 exouser exouser 4096 Jul 27 18:34 .
+    drwxrwxr-x 5 exouser exouser 4096 Jul 27 18:32 ..
+    drwxrwxr-x 5 exouser exouser 4096 Jul 27 18:34 .venv
 
 Next, we will install the necessary dependencies for our dashboard. To start, we will need Dash, Plotly,
 Biopython, dash-bootstrap-components, and dash-bio. Instead of installing these packages one by one,
@@ -46,12 +48,12 @@ them all at once and keep track of our dependencies.
 
 .. code-block:: console
 
-    (.venv) [mbs337-vm]$ touch requirements.txt
-    (.venv) [mbs337-vm]$ echo "dash" >> requirements.txt
-    (.venv) [mbs337-vm]$ echo "biopython" >> requirements.txt
-    (.venv) [mbs337-vm]$ echo "dash-bootstrap-components" >> requirements.txt
-    (.venv) [mbs337-vm]$ echo "dash-bio" >> requirements.txt
-    (.venv) [mbs337-vm]$ cat requirements.txt
+    (.venv) [tutorial-vm]$ touch requirements.txt
+    (.venv) [tutorial-vm]$ echo "dash" >> requirements.txt
+    (.venv) [tutorial-vm]$ echo "biopython" >> requirements.txt
+    (.venv) [tutorial-vm]$ echo "dash-bootstrap-components" >> requirements.txt
+    (.venv) [tutorial-vm]$ echo "dash-bio" >> requirements.txt
+    (.venv) [tutorial-vm]$ cat requirements.txt
     dash
     biopython
     dash-bootstrap-components
@@ -60,57 +62,63 @@ them all at once and keep track of our dependencies.
 Now that we have our ``requirements.txt`` file, we can install all of our dependencies at once using pip.
 
 .. code-block:: console
-    :emphasize-lines: 6, 12-14, 33
+    :emphasize-lines: 7, 14-16, 36
 
-    (.venv) [mbs337-vm]$ pip install -r requirements.txt
-    (.venv) [mbs337-vm]$ pip list
+    (.venv) [tutorial-vm]$ pip install -r requirements.txt
+    (.venv) [tutorial-vm]$ pip list
     Package                   Version
     ------------------------- -----------
-    attrs                     25.4.0
-    biopython                 1.86
+    annotated-types           0.8.0
+    attrs                     26.1.0
+    biopython                 1.87
     blinker                   1.9.0
-    certifi                   2026.2.25
-    charset-normalizer        3.4.5
-    click                     8.3.1
+    certifi                   2026.7.22
+    charset-normalizer        3.4.9
+    click                     8.4.2
     colour                    0.1.5
-    dash                      4.0.0
+    comm                      0.2.3
+    dash                      4.4.1
     dash_bio                  1.0.2
     dash-bootstrap-components 2.0.4
     Flask                     3.1.3
     GEOparse                  2.0.4
-    idna                      3.11
-    importlib_metadata        8.7.1
+    idna                      3.18
+    importlib_metadata        9.0.0
     itsdangerous              2.2.0
+    janus                     2.0.0
     Jinja2                    3.1.6
     joblib                    1.5.3
     jsonschema                4.26.0
     jsonschema-specifications 2025.9.1
     MarkupSafe                3.0.3
-    narwhals                  2.17.0
+    narwhals                  2.24.0
     nest-asyncio              1.6.0
-    numpy                     2.4.3
-    packaging                 26.0
-    pandas                    3.0.1
+    numpy                     2.5.1
+    packaging                 26.2
+    pandas                    3.0.5
     ParmEd                    4.3.1
     periodictable             2.1.0
     pip                       24.0
-    plotly                    6.6.0
+    plotly                    6.9.0
+    pydantic                  2.13.4
+    pydantic_core             2.46.4
     pyparsing                 3.3.2
     python-dateutil           2.9.0.post0
     referencing               0.37.0
-    requests                  2.32.5
+    requests                  2.34.2
     retrying                  1.4.2
-    rpds-py                   0.30.0
-    scikit-learn              1.8.0
-    scipy                     1.17.1
-    setuptools                82.0.1
+    rpds-py                   2026.6.3
+    scikit-learn              1.9.0
+    scipy                     1.18.0
+    setuptools                83.0.0
     six                       1.17.0
     threadpoolctl             3.6.0
-    tqdm                      4.67.3
-    typing_extensions         4.15.0
-    urllib3                   2.6.3
-    Werkzeug                  3.1.6
-    zipp                      3.23.0
+    tqdm                      4.70.0
+    typing_extensions         4.16.0
+    typing-inspection         0.4.2
+    urllib3                   2.7.0
+    Werkzeug                  3.1.8
+    zipp                      4.1.0
 
 
 Building the Basic Dashboard
@@ -133,11 +141,11 @@ Dash application.
 
 .. code-block:: console
 
-    (.venv) [mbs337-vm]$ touch app.py
-    (.venv) [mbs337-vm]$ ls -l
-    total 44
-    -rw-rw-r-- 1 ubuntu ubuntu     0 Mar 10 00:02 app.py
-    -rw-rw-r-- 1 ubuntu ubuntu    50 Mar  9 18:13 requirements.txt
+    (.venv) [tutorial-vm]$ touch app.py
+    (.venv) [tutorial-vm]$ ls -l
+    total 4
+    -rw-rw-r-- 1 exouser exouser  0 Jul 27 18:40 app.py
+    -rw-rw-r-- 1 exouser exouser 50 Jul 27 18:36 requirements.txt
 
 Imports
 ~~~~~~~
@@ -524,9 +532,9 @@ To run the app, simply execute the following command in your VS Code terminal:
 
 .. code-block:: console
 
-    (.venv) [mbs337-vm]$ curl ip.me
+    (.venv) [tutorial-vm]$ curl ip.me
     129.114.38.51
-    (.venv) [mbs337-vm]$ python app.py
+    (.venv) [tutorial-vm]$ python app.py
     Dash is running on http://0.0.0.0:8050/
 
     * Serving Flask app 'app'
